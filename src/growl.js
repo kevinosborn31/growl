@@ -9,20 +9,16 @@ export const Growl = ({ active, message, onDismissed }) => (
   </div>
 )
 
-export function useGrowl() {
-    // state of the growl
+export function useGrowl(timeout = 3000) {
     const [growlActive, setGrowlActive] = React.useState(false)
-    let popupTimeOut = 3000;
     
 
     return [
-        // the first arg is the state
         growlActive, 
 
-        // the second arg is a fn that allows you to safely set its state
         (active) => {
           setGrowlActive(active)
-          setTimeout(function() { setGrowlActive(false); }, popupTimeOut);
+          setTimeout(function() { setGrowlActive(false); }, timeout);
         },
     ]
 }
